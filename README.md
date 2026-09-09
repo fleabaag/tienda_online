@@ -43,18 +43,20 @@ docker compose -f compose.dev.yaml up --build
 
 La primera ejecución puede tardar más porque Docker necesita construir la imagen de desarrollo y descargar las dependencias de Maven.
 
-Después de iniciar correctamente los servicios, la aplicación estará disponible en:
+Después de iniciar correctamente los servicios, se puede probar el endpoint:
 
 ```text
-http://localhost:8080
+http://localhost:8080/category/helloworld
 ```
+
+Desde navegador, curl o postman.
 
 ### Ejecución
 
 El comando utilizado anteriormente sólo la primera vez:
 
 ```bash
-docker compose -f compose.dev.yaml up --build -d
+docker compose -f compose.dev.yaml up --build 
 ```
 
 Para la siguientes ocasiones basta con usar:
