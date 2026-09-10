@@ -27,7 +27,7 @@ El entorno de desarrollo utiliza variables de entorno para las credenciales de M
 Crear un archivo `.env` en la raíz del proyecto y agrega credenciales:
 
 ```env
-copy .env.example .env
+cp .env.example .env
 ```
 
 El archivo `.env` no debe subirse al repositorio.
@@ -40,6 +40,8 @@ Desde la raíz del proyecto:
 ```bash
 docker compose -f compose.dev.yaml up --build
 ```
+
+Nota: Puede haber conflicto de puertos con una instalación local de mysql, para eso se recomienda apagar temporalmente el servicio local.
 
 La primera ejecución puede tardar más porque Docker necesita construir la imagen de desarrollo y descargar las dependencias de Maven.
 

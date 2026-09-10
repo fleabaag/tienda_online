@@ -7,7 +7,6 @@ import com.product.api.product.service.CategoryService;
 import com.product.api.product.entity.Category;
 import java.util.List;
 
-
 @RestController
 @RequestMapping("/category")
 public class CtrlProduct {
@@ -19,7 +18,7 @@ public class CtrlProduct {
 
     @GetMapping()
     public List<Category> getAllCategories() {
-        
+
         CategoryService catService = new CategoryService();
 
         catService.createCategory(new Category("Calzado", "CLZ", null));
@@ -31,6 +30,5 @@ public class CtrlProduct {
 
         return catService.getCategories();
     }
-    
 
 }
