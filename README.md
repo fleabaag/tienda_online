@@ -27,7 +27,7 @@ El entorno de desarrollo utiliza variables de entorno para las credenciales de M
 Crear un archivo `.env` en la raíz del proyecto y agrega credenciales:
 
 ```env
-copy .env.example .env
+cp .env.example .env
 ```
 
 El archivo `.env` no debe subirse al repositorio.
