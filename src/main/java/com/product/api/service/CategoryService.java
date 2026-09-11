@@ -5,8 +5,8 @@ import com.product.api.entity.Category;
 
 public interface CategoryService {
     
-    List<Category> getCategories();
+    public List<Category> getCategories();
     
-    List<Category> getActiveCategories();
+    public List<Category> getActiveCategories();
 
 }

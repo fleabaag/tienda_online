@@ -40,7 +40,8 @@ Desde la raíz del proyecto:
 docker compose -f compose.dev.yaml up --build
 ```
 
-Nota: Puede haber conflicto de puertos con una instalación local de mysql, para eso se recomienda apagar temporalmente el servicio local.
+**Nota:** 
+`Puede haber conflicto de puertos con una instalación local de mysql, para eso se recomienda apagar temporalmente el servicio local.`
 
 La primera ejecución puede tardar más porque Docker necesita construir la imagen de desarrollo y descargar las dependencias de Maven.
 
@@ -117,7 +118,7 @@ docker exec -it tienda-cool-mysql-dev mysql -u tienda_cool_user -p
 El flujo normal será:
 
 ```bash
-docker compose -f compose.dev.yaml up --build
+docker compose -f compose.dev.yaml up -d
 ```
 
 Dejar esa terminal ejecutándose mientras se trabaja.

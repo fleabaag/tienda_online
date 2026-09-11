@@ -37,3 +37,7 @@ HELP.md
 # Dockerfile y compose de producción
 Dockerfile
 compose.yaml
+
+#SQL
+sql/
+*.sql
