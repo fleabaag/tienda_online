@@ -41,7 +41,8 @@ Desde la raíz del proyecto:
 docker compose -f compose.dev.yaml up --build
 ```
 
-Nota: Puede haber conflicto de puertos con una instalación local de mysql, para eso se recomienda apagar temporalmente el servicio local.
+**Nota:** 
+`Puede haber conflicto de puertos con una instalación local de mysql, para eso se recomienda apagar temporalmente el servicio de mysql local.`
 
 La primera ejecución puede tardar más porque Docker necesita construir la imagen de desarrollo y descargar las dependencias de Maven.
 

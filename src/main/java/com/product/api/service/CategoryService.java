@@ -1,6 +1,6 @@
-package com.product.api.product.service;
+package com.product.api.service;
 
-import com.product.api.product.entity.Category;
+import com.product.api.entity.Category;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.HashMap;

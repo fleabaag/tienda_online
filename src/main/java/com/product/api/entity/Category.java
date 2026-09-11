@@ -1,4 +1,4 @@
-package com.product.api.product.entity;
+package com.product.api.entity;
 
 public class Category {
     private Integer category_id;

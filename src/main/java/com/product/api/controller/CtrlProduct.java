@@ -1,10 +1,10 @@
-package com.product.api.product.controller;
+package com.product.api.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.product.api.product.service.CategoryService;
-import com.product.api.product.entity.Category;
+import com.product.api.service.CategoryService;
+import com.product.api.entity.Category;
 import java.util.List;
 
 @RestController
