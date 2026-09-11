@@ -1,10 +1,38 @@
 package com.product.api.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Table;
+import jakarta.persistence.Column;
+import jakarta.persistence.Id;
+
+@Entity
+@Table(name = "category")
 public class Category {
+
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @JsonProperty("category_id")
+    @Column(name = "category_id")
     private Integer category_id;
+
+    @JsonProperty("category")
+    @Column(name="category")
     private String category;
+
+    @JsonProperty("tag")
+    @Column(name="tag")
     private String tag;
+
+    @JsonProperty("parent_category_id")
+    @Column(name="parent_category_id")
     private Integer parentCategory_id;
+
+    @JsonProperty("status")
+    @Column(name="status")
     private Integer status;
 
     // Constructores

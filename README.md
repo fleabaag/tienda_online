@@ -4,19 +4,19 @@ Aplicación desarrollada con Spring Boot, Java y MySQL utilizando Docker Compose
 
 ## Tecnologías
 
-* Java 21
-* Spring Boot 4.1.1
-* Maven 3.9.9 mediante Maven Wrapper
-* MySQL 26.7
-* Docker
-* Docker Compose
+- Java 21
+- Spring Boot 4.1.1
+- Maven 3.9.9 mediante Maven Wrapper
+- MySQL 26.7
+- Docker
+- Docker Compose
 
 ## Requisitos
 
 Antes de levantar el proyecto es necesario tener instalados:
 
-* Docker
-* Docker Compose
+- Docker
+- Docker Compose
 
 El proyecto utiliza Maven Wrapper, por lo que **no es necesario instalar Maven localmente**.
 
@@ -31,7 +31,6 @@ cp .env.example .env
 ```
 
 El archivo `.env` no debe subirse al repositorio.
-
 
 ## Levantar el entorno de desarrollo
 
@@ -58,7 +57,7 @@ Desde navegador, curl o postman.
 El comando utilizado anteriormente sólo la primera vez:
 
 ```bash
-docker compose -f compose.dev.yaml up --build 
+docker compose -f compose.dev.yaml up --build
 ```
 
 Para la siguientes ocasiones basta con usar:
@@ -105,6 +104,12 @@ docker compose -f compose.dev.yaml logs -f app
 
 ```bash
 docker compose -f compose.dev.yaml logs -f mysql
+```
+
+### Entrar a terminal de MySQL
+
+```bash
+docker exec -it tienda-cool-mysql-dev mysql -u tienda_cool_user -p
 ```
 
 ## Flujo recomendado durante el desarrollo
