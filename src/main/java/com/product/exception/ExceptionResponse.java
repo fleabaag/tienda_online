@@ -1,31 +1,28 @@
 package com.product.exception;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.LocalDateTime;
 import org.springframework.http.HttpStatus;
 
-public class ExceptionResponse {
+import com.fasterxml.jackson.annotation.JsonFormat;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
+public class ExceptionResponse {
+    @JsonFormat (shape = JsonFormat.Shape.STRING, pattern = "yyyy-mm-dd hh:mm:ss")
     private LocalDateTime timestamp;
 
     private Integer status;
     private HttpStatus error;
-    private String message;
+    private String messsage;
     private String path;
 
-    /* Construtor */
-
-    public ExceptionResponse() {
+    public ExceptionResponse(){
         super();
+
     }
 
-    /* GETTERS */
-
+    // Getters 
     public LocalDateTime getTimestamp() {
         return timestamp;
     }
-
     public Integer getStatus() {
         return status;
     }
@@ -33,34 +30,27 @@ public class ExceptionResponse {
     public HttpStatus getError() {
         return error;
     }
-
-    public String getMessage() {
-        return message;
+    public String getMesssage() {
+        return messsage;
     }
-
     public String getPath() {
         return path;
     }
 
-    /* SETTERS */
-
+    // Setters 
     public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
     }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
     public void setError(HttpStatus error) {
         this.error = error;
     }
-
-    public void setMessage(String message) {
-        this.message = message;
+    public void setMesssage(String messsage) {
+        this.messsage = messsage;
     }
-
     public void setPath(String path) {
         this.path = path;
+    }
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }

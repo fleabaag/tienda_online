@@ -8,8 +8,8 @@ import com.product.api.entity.Category;
 
 public interface CategoryService {
     
-    public ResponseEntity<List<Category>> getCategories();
+    public ResponseEntity<List<Category>>  getCategories();
     
-    public ResponseEntity<List<Category>> getActiveCategories();
+    public ResponseEntity<List<Category>>  getActiveCategories();
 
 }
