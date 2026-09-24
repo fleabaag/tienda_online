@@ -1,12 +1,15 @@
 package com.product.api.service;
 
 import java.util.List;
+
+import org.springframework.http.ResponseEntity;
+
 import com.product.api.entity.Category;
 
 public interface CategoryService {
     
-    public List<Category> getCategories();
+    public ResponseEntity<List<Category>>  getCategories();
     
-    public List<Category> getActiveCategories();
+    public ResponseEntity<List<Category>>  getActiveCategories();
 
 }

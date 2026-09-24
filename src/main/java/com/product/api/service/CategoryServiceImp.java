@@ -2,7 +2,13 @@ package com.product.api.service;
 
 import com.product.api.entity.Category;
 import com.product.api.repository.RepoCategory;
+import com.product.exception.DBAccessException;
+
+import org.springframework.dao.DataAccessException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 @Service
@@ -26,8 +32,12 @@ public class CategoryServiceImp implements CategoryService {
      * @return arreglo de las categorías
      */
     @Override
-    public List<Category> getCategories() {
-        return repo.getCategories();
+    public ResponseEntity<List<Category>> getCategories() {
+        try{
+            return new ResponseEntity<>(repo.getCategories(), HttpStatus.OK);
+        } catch (DataAccessException e){
+            throw new DBAccessException(e);
+        }
     }
 
     /**
@@ -36,8 +46,9 @@ public class CategoryServiceImp implements CategoryService {
      * @see com.product.api.service.CategoryService#getActiveCategories()
      */
     @Override
-    public List<Category> getActiveCategories() {
-        return repo.findByStatusOrderByCategory(1);
+    public ResponseEntity<List<Category>>  getActiveCategories() {
+        return new ResponseEntity<>(repo.findByStatusOrderByCategory(1), HttpStatus.OK);
     };
+
 
 }

@@ -1,5 +1,6 @@
 package com.product.api.controller;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,20 +20,20 @@ public class CtrlCategory {
     }
 
     @GetMapping()
-    public List<Category> getCategories() {
+    public ResponseEntity<List<Category>> getCategories() {
         return csv.getCategories();
     }
 
     @GetMapping("/active")
-    public List<Category> getActiveCategories() {
+    public ResponseEntity<List<Category>> getActiveCategories() {
         return csv.getActiveCategories();
     }
 
-
     @GetMapping("/helloworld")
     public String helloWorld() {
-        return "Hello World desde la P3";
+        return "Hello World desde la P4";
     }
+
 
 
 }
