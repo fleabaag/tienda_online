@@ -27,7 +27,7 @@ El entorno de desarrollo utiliza variables de entorno para las credenciales de M
 Crear un archivo `.env` en la raíz del proyecto y agrega credenciales:
 
 ```env
-copy .env.example .env
+cp .env.example .env
 ```
 
 El archivo `.env` no debe subirse al repositorio.
@@ -41,20 +41,25 @@ Desde la raíz del proyecto:
 docker compose -f compose.dev.yaml up --build
 ```
 
+**Nota:** 
+`Puede haber conflicto de puertos con una instalación local de mysql, para eso se recomienda apagar temporalmente el servicio de mysql local.`
+
 La primera ejecución puede tardar más porque Docker necesita construir la imagen de desarrollo y descargar las dependencias de Maven.
 
-Después de iniciar correctamente los servicios, la aplicación estará disponible en:
+Después de iniciar correctamente los servicios, se puede probar el endpoint:
 
 ```text
-http://localhost:8080
+http://localhost:8080/category/helloworld
 ```
+
+Desde navegador, curl o postman.
 
 ### Ejecución
 
 El comando utilizado anteriormente sólo la primera vez:
 
 ```bash
-docker compose -f compose.dev.yaml up --build -d
+docker compose -f compose.dev.yaml up --build 
 ```
 
 Para la siguientes ocasiones basta con usar:
