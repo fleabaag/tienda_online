@@ -11,10 +11,6 @@ import java.util.List;
 @RequestMapping("/category")
 public class CtrlProduct {
 
-    @GetMapping("/helloworld")
-    public String helloWorld() {
-        return "Hello World desde la P2";
-    }
 
     @GetMapping()
     public List<Category> getAllCategories() {
