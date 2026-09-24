@@ -1,5 +1,6 @@
 package com.product.api.service;
 
+import com.product.api.dto.DtoCategoryIn;
 import com.product.api.entity.Category;
 import com.product.api.repository.RepoCategory;
 import com.product.exception.DBAccessException;
@@ -32,10 +33,10 @@ public class CategoryServiceImp implements CategoryService {
      * @return arreglo de las categorías
      */
     @Override
-    public ResponseEntity<List<Category>> getCategories() {
-        try{
-            return new ResponseEntity<>(repo.getCategories(), HttpStatus.OK);
-        } catch (DataAccessException e){
+    public ResponseEntity<List<Category>> findAll() {
+        try {
+            return new ResponseEntity<>(repo.findAll(), HttpStatus.OK);
+        } catch (DataAccessException e) {
             throw new DBAccessException(e);
         }
     }
@@ -43,12 +44,65 @@ public class CategoryServiceImp implements CategoryService {
     /**
      * Obtiene las categorías activas
      * 
-     * @see com.product.api.service.CategoryService#getActiveCategories()
+     * @see com.product.api.service.CategoryService#findActive()
      */
     @Override
-    public ResponseEntity<List<Category>>  getActiveCategories() {
+    public ResponseEntity<List<Category>> findActive() {
         return new ResponseEntity<>(repo.findByStatusOrderByCategory(1), HttpStatus.OK);
     };
 
+    /**
+     * Obtiene las categorías hijas a partir del id
+     * 
+     * @see com.product.api.service.CategoryService#findChilds(java.lang.Integer)
+     */
+    @Override
+    public ResponseEntity<List<Category>> findChilds(Integer id) {
+        // TODO:
+        return null;
+    }
+
+    /**
+     * Crea una categoría nueva
+     * 
+     * @see com.product.api.service.CategoryService#create(com.product.api.dto.DtoCategoryIn)
+     */
+    @Override
+    public void create(DtoCategoryIn dto) {
+        // TODO:
+    }
+
+    /**
+     * Actualiza una categoría via id
+     * 
+     * @see com.product.api.service.CategoryService#update(com.product.api.dto.DtoCategoryIn,
+     *      java.lang.Integer)
+     */
+    @Override
+    public void update(DtoCategoryIn dto, Integer id) {
+        // TODO Auto-generated method stub
+    }
+
+    /**
+     * Activa de nuevo una categoría desactivada
+     * 
+     * @see com.product.api.service.CategoryService#enable(java.lang.Integer)
+     */
+    @Override
+    public void enable(Integer id) {
+        // TODO Auto-generated method stub
+
+    }
+
+    /**
+     * Desactiva una categoría sólo si se encuentra activa
+     * 
+     * @see com.product.api.service.CategoryService#disable(java.lang.Integer)
+     */
+    @Override
+    public void disable(Integer id) {
+        // TODO Auto-generated method stub
+
+    }
 
 }
