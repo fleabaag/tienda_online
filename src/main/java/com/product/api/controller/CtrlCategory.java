@@ -20,13 +20,13 @@ public class CtrlCategory {
     }
 
     @GetMapping()
-    public ResponseEntity<List<Category>> getCategories() {
-        return csv.getCategories();
+    public ResponseEntity<List<Category>> findAll() {
+        return csv.findAll();
     }
 
     @GetMapping("/active")
-    public ResponseEntity<List<Category>> getActiveCategories() {
-        return csv.getActiveCategories();
+    public ResponseEntity<List<Category>> findActive() {
+        return csv.findActive();
     }
 
     @GetMapping("/helloworld")

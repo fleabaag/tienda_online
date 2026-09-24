@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 public interface RepoCategory extends JpaRepository<Category, Integer> {
 
     @Query(value = "SELECT * FROM category ORDER BY category", nativeQuery = true)
-    List<Category> getCategories();
+    List<Category> findAll();
 
     List<Category> findByStatusOrderByCategory(@Param("status") Integer status);
 
