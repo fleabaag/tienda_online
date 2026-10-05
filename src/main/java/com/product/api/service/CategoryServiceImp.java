@@ -3,6 +3,7 @@ package com.product.api.service;
 import com.product.api.dto.DtoCategoryIn;
 import com.product.api.entity.Category;
 import com.product.api.repository.RepoCategory;
+import com.product.exception.ApiException;
 import com.product.exception.DBAccessException;
 
 import org.springframework.dao.DataAccessException;
@@ -33,9 +34,9 @@ public class CategoryServiceImp implements CategoryService {
      * @return arreglo de las categorías
      */
     @Override
-    public ResponseEntity<List<Category>> findAll() {
+    public List<Category> findAll() {
         try {
-            return new ResponseEntity<>(repo.findAll(), HttpStatus.OK);
+            return repo.findAll();
         } catch (DataAccessException e) {
             throw new DBAccessException(e);
         }
@@ -47,8 +48,12 @@ public class CategoryServiceImp implements CategoryService {
      * @see com.product.api.service.CategoryService#findActive()
      */
     @Override
-    public ResponseEntity<List<Category>> findActive() {
-        return new ResponseEntity<>(repo.findByStatusOrderByCategory(1), HttpStatus.OK);
+    public List<Category> findActive() {
+        try {
+            return repo.findByStatusOrderByCategory(1);
+        } catch (DataAccessException e) {
+            throw new DBAccessException(e);
+        }
     };
 
     /**
@@ -57,9 +62,12 @@ public class CategoryServiceImp implements CategoryService {
      * @see com.product.api.service.CategoryService#findChilds(java.lang.Integer)
      */
     @Override
-    public ResponseEntity<List<Category>> findChilds(Integer id) {
-        // TODO:
-        return null;
+    public List<Category> findChilds(Integer id) {
+        try {
+            return repo.findChilds(id);
+        } catch (DataAccessException e) {
+            throw new DBAccessException(e);
+        }
     }
 
     /**
@@ -69,7 +77,17 @@ public class CategoryServiceImp implements CategoryService {
      */
     @Override
     public void create(DtoCategoryIn dto) {
-        // TODO:
+        try {
+            // TODO: se hacen las validaciones aqúi
+            repo.create(dto.getCategory(), dto.getTag(), dto.getParentCategoryId());
+        } catch (DataAccessException e) {
+            String msg = e.getLocalizedMessage();
+            if (msg != null && msg.contains("ux_category"))
+                throw new ApiException(HttpStatus.CONFLICT, "El nombre de la categoría ya está en uso.");
+            if (msg != null && msg.contains("ux_tag"))
+                throw new ApiException(HttpStatus.CONFLICT, "EL tag de la categoría ya está en uso.");
+            throw new ApiException(HttpStatus.BAD_REQUEST, "Error al crear la categoría.");
+        }
     }
 
     /**
@@ -80,7 +98,19 @@ public class CategoryServiceImp implements CategoryService {
      */
     @Override
     public void update(DtoCategoryIn dto, Integer id) {
-        // TODO Auto-generated method stub
+        try {
+            repo.update(dto.getCategory(), dto.getTag(), dto.getParentCategoryId());
+        } catch (DataAccessException e) {
+            String msg = e.getLocalizedMessage();
+            if (msg != null && msg.contains("ux_category"))
+                throw new ApiException(HttpStatus.CONFLICT, "El nombre de la categoría ya está en uso.");
+            if (msg != null && msg.contains("ux_tag"))
+                throw new ApiException(HttpStatus.CONFLICT, "El tag de la categoría ya está en uso.");
+            if (msg != null && msg.contains("ux_parent_category_id"))
+                throw new ApiException(HttpStatus.CONFLICT,
+                        "El id parent es inválido o la categoría parent está inactiva.");
+            throw new ApiException(HttpStatus.BAD_REQUEST, "Error al actualizar la categoría.");
+        }
     }
 
     /**
@@ -90,7 +120,11 @@ public class CategoryServiceImp implements CategoryService {
      */
     @Override
     public void enable(Integer id) {
-        // TODO Auto-generated method stub
+        try {
+            repo.updateStatus(id, 1);
+        } catch (DataAccessException e) {
+            throw new ApiException(HttpStatus.BAD_REQUEST, "Error al activar la categoría.");
+        }
 
     }
 
@@ -104,4 +138,6 @@ public class CategoryServiceImp implements CategoryService {
         // TODO Auto-generated method stub
 
     }
+
+    
 }

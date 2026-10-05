@@ -11,7 +11,7 @@ public class ExceptionResponse {
 
     private Integer status;
     private HttpStatus error;
-    private String messsage;
+    private String message;
     private String path;
 
     public ExceptionResponse(){
@@ -30,8 +30,8 @@ public class ExceptionResponse {
     public HttpStatus getError() {
         return error;
     }
-    public String getMesssage() {
-        return messsage;
+    public String getMessage() {
+        return message;
     }
     public String getPath() {
         return path;
@@ -44,8 +44,8 @@ public class ExceptionResponse {
     public void setError(HttpStatus error) {
         this.error = error;
     }
-    public void setMesssage(String messsage) {
-        this.messsage = messsage;
+    public void setMessage(String message) {
+        this.message = message;
     }
     public void setPath(String path) {
         this.path = path;

@@ -1,6 +1,5 @@
 package com.product.api.dto;
 
-// import org.antlr.v4.runtime.misc.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.validation.constraints.NotNull;
@@ -11,7 +10,7 @@ public class DtoCategoryIn {
     @NotNull(message = "La categoria es obligatoria")
     private String category;
 
-    @JsonProperty ("tag")
+    @JsonProperty("tag")
     @NotNull(message = "La etiqueta es obligatoria")
     private String tag;
 
