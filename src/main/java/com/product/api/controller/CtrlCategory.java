@@ -46,11 +46,11 @@ public class CtrlCategory {
         return ResponseEntity.ok().body("La categoría ha sido registrada.");
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<String> update(@PathVariable DtoCategoryIn dto, @RequestBody Integer id) {
-        csv.update(dto, id);
-        return ResponseEntity.ok().body("La categoría ha sido actualizada.");
-    }
+    @PutMapping("/{id}") // revisar el orden en el que esta organizado 
+    public ResponseEntity<String> update(@PathVariable Integer id, @RequestBody DtoCategoryIn dto) {
+    csv.update(dto, id);
+    return ResponseEntity.ok("La categoría ha sido actualizada.");
+}
 
     @PatchMapping("/{id}/enable")
     public ResponseEntity<String> enable(@PathVariable Integer id) {
