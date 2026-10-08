@@ -120,7 +120,7 @@ public class CategoryServiceImp implements CategoryService {
      */
     @Override
     public void enable(Integer id) {
-        if (id == null || id <= 0){
+        if (id == null || id <= 0) {
             throw new ApiException(HttpStatus.BAD_REQUEST, "El id ingresado no es válido");
         }
         try {
@@ -138,27 +138,34 @@ public class CategoryServiceImp implements CategoryService {
      */
     @Override
     public void disable(Integer id) {
-        if(id == null || id <= 0){
+        if (id == null || id <= 0) {
             throw new ApiException(HttpStatus.BAD_REQUEST, "el id ingresado no es válido. Verifica nuevamente");
         }
         try {
-        List<Category> children = repo.findChilds(id);
+            List<Category> children = repo.findChilds(id);
+            boolean hasActiveChilds = false;
 
-        if (children != null && !children.isEmpty()) {
-            throw new ApiException(
-                    HttpStatus.CONFLICT,
-                    "No se puede desactivar la categoría porque tiene categorías hijas."
-            );
-        }
+            if (children != null && !children.isEmpty()) {
+                for (Category category : children)
+                if (category.getStatus() == 1) {
+                    hasActiveChilds = true;
+                    break;
+                }
+            }            
 
-        repo.updateStatus(id, 0);
+            if (hasActiveChilds) {
+                throw new ApiException(
+                        HttpStatus.CONFLICT,
+                        "No se puede desactivar la categoría porque tiene al menos una categorías hija activa.");
+            }
 
-        } catch (ApiException e){
-            throw e; 
+            repo.updateStatus(id, 0);
+
+        } catch (ApiException e) {
+            throw e;
         } catch (DataAccessException e) {
             throw new DBAccessException(e);
         }
     }
 
-    
 }

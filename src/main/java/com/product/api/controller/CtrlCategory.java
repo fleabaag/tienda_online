@@ -47,7 +47,7 @@ public class CtrlCategory {
     }
 
     @PutMapping("/{id}") // revisar el orden en el que esta organizado 
-    public ResponseEntity<String> update(@PathVariable Integer id, @RequestBody DtoCategoryIn dto) {
+    public ResponseEntity<String> update(@RequestBody DtoCategoryIn dto, @PathVariable Integer id) {
     csv.update(dto, id);
     return ResponseEntity.ok("La categoría ha sido actualizada.");
 }
