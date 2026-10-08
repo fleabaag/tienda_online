@@ -25,20 +25,25 @@ public interface RepoCategory extends JpaRepository<Category, Integer> {
     @Modifying(clearAutomatically = true, flushAutomatically = true)
     @Transactional
     @Query(value = "INSERT INTO category(category, tag, status, parent_category_id) VALUES (:category, :tag, 1, :parent_category_id)", nativeQuery = true)
-    void create(@Param("category") String category, @Param("tag") String tag,
+    void create(@Param("category") String category,
+            @Param("tag") String tag,
             @Param("parent_category_id") Integer parent_category_id);
 
     @Modifying(clearAutomatically = true, flushAutomatically = true)
     @Transactional
-    @Query(value = "UPDATE category SET category = :category, tag = :tag, parent_category_id = :parent_category_id"
+    @Query(value = "UPDATE category SET category = :category, tag = :tag, parent_category_id = :parent_category_id "
             + "WHERE category_id = :category_id", nativeQuery = true)
-    void update(@Param("category_id") Integer category_id, @Param("category") String category, @Param("tag") String tag,
+    void update(@Param("category_id") Integer category_id,
+            @Param("category") String category,
+            @Param("tag") String tag,
             @Param("parent_category_id") Integer parent_category_id);
 
     @Modifying(clearAutomatically = true, flushAutomatically = true)
     @Transactional
-    @Query(value = "UPDATE category SET status = :status " + "WHERE category_id = :category_id", nativeQuery = true)
-    void updateStatus(@Param("category_id") Integer category_id, @Param("status") Integer status);
+    @Query(value = "UPDATE category SET status = :status " +
+            "WHERE category_id = :category_id", nativeQuery = true)
+    void updateStatus(@Param("category_id") Integer category_id,
+            @Param("status") Integer status);
 
     // excludeId = -1 en create, el id propio en update
     @Query(value = "SELECT COUNT(*) FROM category WHERE LOWER(category) = LOWER(:category) AND category_id <> :excludeId", nativeQuery = true)
