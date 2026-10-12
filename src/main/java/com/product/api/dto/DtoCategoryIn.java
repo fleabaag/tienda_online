@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotNull;
 
 public class DtoCategoryIn {
 
-    @JsonProperty("Category")
+    @JsonProperty("category")
     @NotNull(message = "La categoria es obligatoria")
     private String category;
 

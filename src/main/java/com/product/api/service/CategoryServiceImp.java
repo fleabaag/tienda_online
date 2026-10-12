@@ -66,6 +66,7 @@ public class CategoryServiceImp implements CategoryService {
      */
     @Override
     public List<Category> findChilds(Integer id) {
+        validateId(id);
         try {
             return repo.findChilds(id);
         } catch (DataAccessException e) {
@@ -116,7 +117,10 @@ public class CategoryServiceImp implements CategoryService {
             validateUniqueness(name, tag, id);
             validateParent(dto.getParentCategoryId(), id);
 
-            repo.update(id, name, tag, dto.getParentCategoryId());
+            Integer parent_category_id = dto.getParentCategoryId() != null ? dto.getParentCategoryId()
+                    : repo.parent_category_id(id);
+
+            repo.update(id, name, tag, parent_category_id);
         } catch (DataAccessException e) {
             throw DBExceptionTranslator.translate(e, "Error al actualizar la categoría.");
         }
@@ -184,10 +188,9 @@ public class CategoryServiceImp implements CategoryService {
             throw new ApiException(HttpStatus.BAD_REQUEST, "El nombre de la categoría es requerido.");
         if (dto.getTag() == null || dto.getTag().isBlank())
             throw new ApiException(HttpStatus.BAD_REQUEST, "El tag de la categoría es requerido.");
-        // Ajusta los límites a la longitud real de tus columnas
-        if (dto.getCategory().trim().length() > 50)
+        if (dto.getCategory().trim().length() > 100)
             throw new ApiException(HttpStatus.BAD_REQUEST, "El nombre de la categoría excede la longitud permitida.");
-        if (dto.getTag().trim().length() > 50)
+        if (dto.getTag().trim().length() > 100)
             throw new ApiException(HttpStatus.BAD_REQUEST, "El tag de la categoría excede la longitud permitida.");
         if (dto.getParentCategoryId() != null && dto.getParentCategoryId() <= 0)
             throw new ApiException(HttpStatus.BAD_REQUEST, "El id de la categoría padre no es válido.");
@@ -202,6 +205,18 @@ public class CategoryServiceImp implements CategoryService {
         } catch (DataAccessException e) {
             throw new DBAccessException(e);
         }
+    }
+
+    private void validateId(Integer id) {
+        if (id == null || id < 1) {
+            throw new ApiException(HttpStatus.BAD_REQUEST, "El id no puede ser nulo o negativo.");
+        }
+        try {
+            repo.findById(id);
+        } catch (DataAccessException e) {
+            throw new DBAccessException(e);
+        }
+
     }
 
     /**

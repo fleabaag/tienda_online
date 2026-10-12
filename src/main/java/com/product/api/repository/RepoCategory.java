@@ -52,4 +52,6 @@ public interface RepoCategory extends JpaRepository<Category, Integer> {
     @Query(value = "SELECT COUNT(*) FROM category WHERE LOWER(tag) = LOWER(:tag) AND category_id <> :excludeId", nativeQuery = true)
     int countByTag(@Param("tag") String tag, @Param("excludeId") Integer excludeId);
 
+    @Query(value = "SELECT parent_category_id FROM category WHERE category_id = :category_id", nativeQuery = true)
+    int parent_category_id(@Param("category_id") Integer category_id);
 }

@@ -36,7 +36,7 @@ public class CtrlCategory {
     }
 
     @GetMapping("/{id}/childs")
-    public ResponseEntity<List<Category>> getMethodName(@PathVariable Integer id) {
+    public ResponseEntity<List<Category>> getChilds(@PathVariable Integer id) {
         return new ResponseEntity<>(csv.findChilds(id), HttpStatus.OK);
     }
 
