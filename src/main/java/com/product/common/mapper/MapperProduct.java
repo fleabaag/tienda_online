@@ -7,21 +7,21 @@ import org.springframework.stereotype.Service;
 
 import com.product.api.dto.in.DtoProductIn;
 import com.product.api.dto.out.DtoProductListOut;
+import com.product.api.dto.out.DtoProductOut;
 import com.product.api.entity.Product;
 
 @Service
 public class MapperProduct {
-	
-	public List<DtoProductListOut> fromProductList(List<Product> products){
+
+	public List<DtoProductListOut> fromProductList(List<Product> products) {
 		List<DtoProductListOut> list = new ArrayList<>();
-		for(Product product: products) {
+		for (Product product : products) {
 			list.add(new DtoProductListOut(
 					product.getProduct_id(),
 					product.getGtin(),
 					product.getProduct(),
 					product.getPrice(),
-					product.getStatus()
-					));
+					product.getStatus()));
 		}
 		return list;
 	}
@@ -35,14 +35,28 @@ public class MapperProduct {
 		product.setStock(dto.getStock());
 		product.setCategory_id(dto.getCategory_id());
 		product.setStatus(1);
-        
-        return product;
+
+		return product;
 	}
-	
+
 	public Product fromDto(Integer id, DtoProductIn dto) {
 		Product product = fromDto(dto);
 		product.setProduct_id(id);
 		return product;
 	}
-	
+
+	public DtoProductOut fromProduct(Product product) {
+		DtoProductOut out = new DtoProductOut();
+
+		out.setProduct_id(product.getProduct_id());
+		out.setProduct(product.getProduct());
+		out.setDescription(product.getDescription());
+		out.setPrice(product.getPrice());
+		out.setStock(product.getStock());
+		out.setCategory_id(product.getCategory_id());
+		out.setStatus(product.getStatus());
+
+		return out;
+	}
+
 }

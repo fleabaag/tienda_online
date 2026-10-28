@@ -18,11 +18,11 @@ import com.product.exception.ApiException;
 import com.product.exception.DBAccessException;
 
 @Service
-public class SvcProductImp implements SvcProduct{
-	
+public class SvcProductImp implements SvcProduct {
+
 	@Autowired
 	RepoProduct repo;
-	
+
 	@Autowired
 	MapperProduct mapper;
 
@@ -31,7 +31,7 @@ public class SvcProductImp implements SvcProduct{
 		try {
 			List<Product> products = repo.findAll();
 			return new ResponseEntity<>(mapper.fromProductList(products), HttpStatus.OK);
-		}catch (DataAccessException e) {
+		} catch (DataAccessException e) {
 			throw new DBAccessException(e);
 		}
 	}
@@ -40,9 +40,10 @@ public class SvcProductImp implements SvcProduct{
 	public ResponseEntity<DtoProductOut> getProduct(Integer id) {
 		try {
 			validateProductId(id);
-			
-			return new ResponseEntity<>(null, HttpStatus.OK);
-		}catch (DataAccessException e) {
+			Product product = repo.findById(id)
+					.orElseThrow(() -> new ApiException(HttpStatus.NOT_FOUND, "El id del producto no existe."));
+			return new ResponseEntity<>(mapper.fromProduct(product), HttpStatus.OK);
+		} catch (DataAccessException e) {
 			throw new DBAccessException(e);
 		}
 	}
@@ -53,7 +54,7 @@ public class SvcProductImp implements SvcProduct{
 			Product product = mapper.fromDto(in);
 			repo.save(product);
 			return new ResponseEntity<>("El producto ha sido registrado", HttpStatus.CREATED);
-		}catch (DataAccessException e) {
+		} catch (DataAccessException e) {
 			if (e.getLocalizedMessage().contains("ux_product_gtin"))
 				throw new ApiException(HttpStatus.CONFLICT, "El gtin del producto ya está registrado");
 			if (e.getLocalizedMessage().contains("ux_product_product"))
@@ -72,7 +73,7 @@ public class SvcProductImp implements SvcProduct{
 			Product product = mapper.fromDto(id, in);
 			repo.save(product);
 			return new ResponseEntity<>("El producto ha sido actualizado", HttpStatus.OK);
-		}catch (DataAccessException e) {
+		} catch (DataAccessException e) {
 			if (e.getLocalizedMessage().contains("ux_product_gtin"))
 				throw new ApiException(HttpStatus.CONFLICT, "El gtin del producto ya está registrado");
 			if (e.getLocalizedMessage().contains("ux_product_product"))
@@ -92,7 +93,7 @@ public class SvcProductImp implements SvcProduct{
 			product.setStatus(1);
 			repo.save(product);
 			return new ResponseEntity<>("El producto ha sido activado", HttpStatus.OK);
-		}catch (DataAccessException e) {
+		} catch (DataAccessException e) {
 			throw new DBAccessException(e);
 		}
 	}
@@ -105,17 +106,17 @@ public class SvcProductImp implements SvcProduct{
 			product.setStatus(0);
 			repo.save(product);
 			return new ResponseEntity<>("El producto ha sido desactivado", HttpStatus.OK);
-		}catch (DataAccessException e) {
+		} catch (DataAccessException e) {
 			throw new DBAccessException(e);
 		}
 	}
-	
+
 	private void validateProductId(Integer id) {
 		try {
-			if(repo.findById(id).isEmpty()) {
+			if (repo.findById(id).isEmpty()) {
 				throw new ApiException(HttpStatus.NOT_FOUND, "El id del producto no existe");
 			}
-		}catch (DataAccessException e) {
+		} catch (DataAccessException e) {
 			throw new DBAccessException(e);
 		}
 	}
