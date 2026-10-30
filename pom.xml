@@ -58,7 +58,7 @@
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-bom</artifactId>
 			<version>2026.0.1</version>
-			<scope>import</scope>
+			<scope>test</scope>
 			<type>pom</type>
 		</dependency>
 

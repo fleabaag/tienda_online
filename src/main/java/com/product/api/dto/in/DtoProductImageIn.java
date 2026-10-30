@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotNull;
 
 public class DtoProductImageIn {
-
     @JsonProperty("image")
     @NotNull(message = "La imagen es obligatoria")
     private String image;

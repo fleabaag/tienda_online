@@ -3,9 +3,7 @@ package com.product.api.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,8 +17,6 @@ import com.product.api.dto.in.DtoProductIn;
 import com.product.api.dto.out.DtoProductListOut;
 import com.product.api.dto.out.DtoProductOut;
 import com.product.api.service.SvcProduct;
-import com.product.common.dto.String;
-import com.product.exception.ApiException;
 
 import jakarta.validation.Valid;
 
@@ -30,6 +26,10 @@ public class CtrlProduct {
 
 	@Autowired
 	SvcProduct svc;
+
+	CtrlProduct(SvcProduct svc) {
+		this.svc = svc;
+	}
 
 	@GetMapping
 	public ResponseEntity<List<DtoProductListOut>> getProducts() {

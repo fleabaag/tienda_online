@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class DtoProductImageOut {
 
     @JsonProperty("product_image_id")
-    private Integer productImageId;
+    private Integer product_image_id;
 
     @JsonProperty("product_id")
     private Integer product_id;
@@ -14,11 +14,11 @@ public class DtoProductImageOut {
     private String image;
 
     public Integer getProductImageId() {
-        return productImageId;
+        return product_image_id;
     }
 
-    public void setProductImageId(Integer productImageId) {
-        this.productImageId = productImageId;
+    public void setProductImageId(Integer product_image_id) {
+        this.product_image_id = product_image_id;
     }
 
     public Integer getProduct_id() {

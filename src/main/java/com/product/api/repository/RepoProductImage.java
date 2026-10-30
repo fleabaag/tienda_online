@@ -6,12 +6,16 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.product.api.entity.PoductImage;
+import com.product.api.entity.ProductImage;
 
 @Repository
-public interface RepoProductImage extends JpaRepository<PoductImage, Integer> {
+public interface RepoProductImage extends JpaRepository<ProductImage, Integer> {
 
-    List<PoductImage> findByProductIdAndStatusOrderByProductImageIdAsc(Integer productId, Integer status);
+    List<ProductImage> findByProductIdAndStatusOrderByProductImageIdAsc(
+            Integer productId,
+            Integer status);
 
-    Optional<PoductImage> findByProductImageIdAndProductId(Integer productImageId, Integer productId);
+    Optional<ProductImage> findByProductImageIdAndProductId(
+            Integer productImageId,
+            Integer productId);
 }

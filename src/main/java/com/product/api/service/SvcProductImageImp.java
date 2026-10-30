@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 
 import com.product.api.dto.in.DtoProductImageIn;
 import com.product.api.dto.out.DtoProductImageOut;
-import com.product.api.entity.PoductImage;
+import com.product.api.entity.ProductImage;
 import com.product.api.repository.RepoProduct;
 import com.product.api.repository.RepoProductImage;
 import com.product.exception.ApiException;
@@ -30,14 +30,17 @@ public class SvcProductImageImp implements SvcProductImage {
 
     private final RepoProduct repoProduct;
     private final RepoProductImage repoProductImage;
+
+    @Value("${app.upload.dir:uploads}")
     private final String uploadDir;
+    @Value("${app.upload.images:img}")
     private final String uploadImages;
 
     public SvcProductImageImp(
             RepoProduct repoProduct,
             RepoProductImage repoProductImage,
             @Value("${app.upload.dir:uploads}") String uploadDir,
-            @Value("${app.upload.images:product}") String uploadImages) {
+            @Value("${app.upload.images:img}") String uploadImages) {
         this.repoProduct = repoProduct;
         this.repoProductImage = repoProductImage;
         this.uploadDir = uploadDir;
@@ -60,21 +63,21 @@ public class SvcProductImageImp implements SvcProductImage {
 
     @Override
     public ResponseEntity<String> createProductImage(Integer productId, DtoProductImageIn in) {
-        validateProductId(productId);
         if (in == null || in.getImage() == null || in.getImage().isBlank()) {
             throw new ApiException(HttpStatus.BAD_REQUEST, "La imagen es obligatoria.");
         }
 
         try {
+            validateProductId(productId);           
             String encodedImage = extractBase64(in.getImage());
             byte[] imageBytes = Base64.getDecoder().decode(encodedImage);
-            String fileName = UUID.randomUUID() + ".png";
+            String fileName = UUID.randomUUID().toString() + ".png";
             Path imagePath = Paths.get(uploadDir, uploadImages, "product", fileName);
 
             Files.createDirectories(imagePath.getParent());
             Files.write(imagePath, imageBytes);
 
-            PoductImage productImage = new PoductImage();
+            ProductImage productImage = new ProductImage();
             productImage.setProduct_id(productId);
             productImage.setImage("/img/product/" + fileName);
             productImage.setStatus(ACTIVE);
@@ -96,7 +99,7 @@ public class SvcProductImageImp implements SvcProductImage {
         validateId(productImageId, "El id de la imagen no es válido.");
 
         try {
-            PoductImage productImage = repoProductImage
+            ProductImage productImage = repoProductImage
                     .findByProductImageIdAndProductId(productImageId, productId)
                     .orElseThrow(() -> new ApiException(HttpStatus.NOT_FOUND,
                             "El id de la imagen del producto no existe."));
@@ -144,10 +147,10 @@ public class SvcProductImageImp implements SvcProductImage {
         }
     }
 
-    private DtoProductImageOut toDto(PoductImage image) {
+    private DtoProductImageOut toDto(ProductImage image) {
         DtoProductImageOut out = new DtoProductImageOut();
         out.setProductImageId(image.getProduct_image_id());
-        out.setProductId(image.getProduct_id());
+        out.setProduct_id(image.getProduct_id());
         out.setImage(image.getImage());
         return out;
     }

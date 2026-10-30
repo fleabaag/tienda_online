@@ -9,15 +9,15 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "product_image")
-public class PoductImage {
+public class ProductImage {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "product_image_id")
-    private Integer product_image_id;
+    private Integer productImageId;
 
     @Column(name = "product_id")
-    private Integer product_id;
+    private Integer productId;
 
     @Column(name = "image")
     private String image;
@@ -26,19 +26,19 @@ public class PoductImage {
     private Integer status;
 
     public Integer getProduct_image_id() {
-        return product_image_id;
+        return productImageId;
     }
 
-    public void setProduct_image_id(Integer product_image_id) {
-        this.product_image_id = product_image_id;
+    public void setProduct_image_id(Integer productImageId) {
+        this.productImageId = productImageId;
     }
 
     public Integer getProduct_id() {
-        return product_id;
+        return productId;
     }
 
-    public void setProduct_id(Integer product_id) {
-        this.product_id = product_id;
+    public void setProduct_id(Integer productId) {
+        this.productId = productId;
     }
 
     public String getImage() {

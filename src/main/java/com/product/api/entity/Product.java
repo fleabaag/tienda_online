@@ -14,7 +14,7 @@ public class Product {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "product_id")
-	private Integer product_id;
+	private Integer productId;
 	
 	@Column(name = "gtin")
 	private String gtin;
@@ -32,17 +32,17 @@ public class Product {
 	private Integer stock;
 
 	@Column(name = "category_id")
-	private Integer category_id;
+	private Integer categoryId;
 
 	@Column(name = "status")
 	private Integer status;
 
 	public Integer getProduct_id() {
-		return product_id;
+		return productId;
 	}
 
 	public void setProduct_id(Integer product_id) {
-		this.product_id = product_id;
+		this.productId = product_id;
 	}
 
 	public String getGtin() {
@@ -86,11 +86,11 @@ public class Product {
 	}
 
 	public Integer getCategory_id() {
-		return category_id;
+		return categoryId;
 	}
 
 	public void setCategory_id(Integer category_id) {
-		this.category_id = category_id;
+		this.categoryId = category_id;
 	}
 
 	public Integer getStatus() {
