@@ -41,3 +41,8 @@ compose.yaml
 #SQL
 sql/
 *.sql
+
+#Imagenes
+uploads/
+*.png
+*.jpg

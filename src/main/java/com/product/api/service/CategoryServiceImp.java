@@ -1,6 +1,6 @@
 package com.product.api.service;
 
-import com.product.api.dto.DtoCategoryIn;
+import com.product.api.dto.in.DtoCategoryIn;
 import com.product.api.entity.Category;
 import com.product.api.repository.RepoCategory;
 import com.product.exception.ApiException;
@@ -77,7 +77,7 @@ public class CategoryServiceImp implements CategoryService {
     /**
      * Crea una categoría nueva
      * 
-     * @see com.product.api.service.CategoryService#create(com.product.api.dto.DtoCategoryIn)
+     * @see com.product.api.service.CategoryService#create(com.product.api.dto.in.DtoCategoryIn)
      */
     @Override
     public void create(DtoCategoryIn dto) {
@@ -98,7 +98,7 @@ public class CategoryServiceImp implements CategoryService {
     /**
      * Actualiza una categoría via id
      * 
-     * @see com.product.api.service.CategoryService#update(com.product.api.dto.DtoCategoryIn,
+     * @see com.product.api.service.CategoryService#update(com.product.api.dto.in.DtoCategoryIn,
      *      java.lang.Integer)
      */
     @Override

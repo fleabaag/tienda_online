@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.product.api.service.CategoryService;
-import com.product.api.dto.DtoCategoryIn;
+import com.product.api.dto.in.DtoCategoryIn;
 import com.product.api.entity.Category;
 import java.util.List;
 import org.springframework.web.bind.annotation.PostMapping;
